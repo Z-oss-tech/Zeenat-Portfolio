@@ -7,8 +7,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion, AnimatePresence } from "framer-motion";
 import confetti from "canvas-confetti";
-import { Mail, Send, CheckCircle2, Phone, Copy, Check, MapPin, Globe, Clock, QrCode } from "lucide-react";
-import { GithubIcon, LinkedinIcon, InstagramIcon } from "@/components/ui/Icons";
+import { Mail, Send, CheckCircle2, Phone, Copy, Check, MapPin, Rocket, Clock } from "lucide-react";
+import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
 
 const contactSchema = z.object({
   name: z.string().min(2, "Name must be at least 2 characters"),
@@ -23,7 +23,6 @@ export function ContactSection() {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [copiedEmail, setCopiedEmail] = useState(false);
-  const [copiedPhone, setCopiedPhone] = useState(false);
 
   const {
     register,
@@ -60,12 +59,6 @@ export function ContactSection() {
     setTimeout(() => setCopiedEmail(false), 2500);
   };
 
-  const handleCopyPhone = () => {
-    navigator.clipboard.writeText("+91 9142154554");
-    setCopiedPhone(true);
-    setTimeout(() => setCopiedPhone(false), 2500);
-  };
-
   return (
     <section id="contact" className="py-28 relative overflow-hidden bg-[#08090D]">
       
@@ -88,10 +81,10 @@ export function ContactSection() {
             </span>
             <h2 className="text-4xl sm:text-6xl font-extrabold font-heading text-white tracking-tight mb-4 leading-tight">
               Let's Build Something <br />
-              <span className="text-gradient-purple">Extraordinary Together.</span>
+              <span className="text-gradient-purple">Meaningful Together.</span>
             </h2>
             <p className="text-base sm:text-lg text-slate-400">
-              Have a mobile app inquiry, product partnership, or contract offer? Get in touch directly.
+              Interested in collaborating or building a product? Let's connect and create something exceptional through <span className="text-[#06B6D4] font-semibold">BliXo.Tech</span>.
             </p>
           </motion.div>
         </div>
@@ -99,7 +92,7 @@ export function ContactSection() {
         {/* Split Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-stretch">
           
-          {/* Left Column: Profile Card, Timezone, Direct Contact & QR */}
+          {/* Left Column: Direct Contact Details & BliXo Card */}
           <motion.div
             initial={{ opacity: 0, x: -30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -109,7 +102,7 @@ export function ContactSection() {
           >
             <div className="p-8 rounded-3xl glass-panel border border-white/10 shadow-2xl space-y-6">
               
-              {/* Profile Avatar Header */}
+              {/* Profile Card Header */}
               <div className="flex items-center gap-4 pb-6 border-b border-white/10">
                 <div className="relative w-16 h-16 rounded-2xl overflow-hidden border-2 border-[#7C3AED]">
                   <Image
@@ -129,21 +122,19 @@ export function ContactSection() {
                 </div>
               </div>
 
-              {/* Timezone & Location */}
-              <div className="grid grid-cols-2 gap-3">
-                <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-2.5">
-                  <Clock className="w-4 h-4 text-[#3B82F6] shrink-0" />
-                  <div>
-                    <span className="text-[10px] text-slate-400 font-bold block">TIMEZONE</span>
-                    <span className="text-xs font-bold text-white">IST (UTC+5:30)</span>
-                  </div>
+              {/* Venture Badge */}
+              <div className="p-4 rounded-2xl bg-[#7C3AED]/10 border border-[#7C3AED]/30 flex items-center gap-3">
+                <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-white/20 shrink-0">
+                  <Image
+                    src="/assets/blixo_logo.jpg"
+                    alt="BliXo.Tech"
+                    fill
+                    className="object-cover"
+                  />
                 </div>
-                <div className="p-3.5 rounded-2xl bg-white/5 border border-white/5 flex items-center gap-2.5">
-                  <MapPin className="w-4 h-4 text-[#EC4899] shrink-0" />
-                  <div>
-                    <span className="text-[10px] text-slate-400 font-bold block">LOCATION</span>
-                    <span className="text-xs font-bold text-white">Valsad, Gujarat</span>
-                  </div>
+                <div>
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-[#06B6D4] block">Personal Software Venture</span>
+                  <p className="text-xs font-bold text-white">BliXo.Tech Studio</p>
                 </div>
               </div>
 
@@ -169,26 +160,15 @@ export function ContactSection() {
                 </button>
               </div>
 
-              {/* Direct Phone Card */}
-              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-between gap-3">
-                <div className="flex items-center gap-3 overflow-hidden">
-                  <div className="w-10 h-10 rounded-xl bg-[#22C55E]/20 text-[#22C55E] flex items-center justify-center shrink-0">
-                    <Phone className="w-5 h-5" />
-                  </div>
-                  <div className="truncate">
-                    <p className="text-[10px] uppercase text-slate-400 font-bold">Direct Phone / WhatsApp</p>
-                    <p className="text-xs sm:text-sm font-bold text-white truncate">
-                      +91 9142154554
-                    </p>
-                  </div>
+              {/* Location Card */}
+              <div className="p-4 rounded-2xl bg-white/5 border border-white/10 flex items-center gap-3">
+                <div className="w-10 h-10 rounded-xl bg-[#EC4899]/20 text-[#EC4899] flex items-center justify-center shrink-0">
+                  <MapPin className="w-5 h-5" />
                 </div>
-                <button
-                  onClick={handleCopyPhone}
-                  className="p-2.5 rounded-xl bg-white/10 hover:bg-[#22C55E] text-white transition-colors shrink-0"
-                  title="Copy Phone"
-                >
-                  {copiedPhone ? <Check className="w-4 h-4 text-[#22C55E]" /> : <Copy className="w-4 h-4" />}
-                </button>
+                <div>
+                  <p className="text-[10px] uppercase text-slate-400 font-bold">Location</p>
+                  <p className="text-xs sm:text-sm font-bold text-white">Valsad, Gujarat, India</p>
+                </div>
               </div>
 
               {/* Social Channels */}
@@ -216,7 +196,7 @@ export function ContactSection() {
             </div>
           </motion.div>
 
-          {/* Right Column: Minimal Dark Glass Form */}
+          {/* Right Column: Minimal Glass Form */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -241,7 +221,7 @@ export function ContactSection() {
                       Message Sent Successfully!
                     </h3>
                     <p className="text-sm text-slate-400 max-w-md mx-auto">
-                      Thank you for reaching out. Zeenat Shaikh will review your proposal and get back to you shortly.
+                      Thank you for reaching out. Zeenat Shaikh will review your proposal and get back to you promptly.
                     </p>
                     <button
                       onClick={() => setIsSubmitted(false)}
@@ -295,7 +275,7 @@ export function ContactSection() {
                       </label>
                       <input
                         {...register("subject")}
-                        placeholder="Mobile Application Project Proposal"
+                        placeholder="Mobile App / Web Software Proposal"
                         className="w-full px-4 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-[#7C3AED] focus:ring-1 focus:ring-[#7C3AED] transition-all"
                       />
                       {errors.subject && (
@@ -310,7 +290,7 @@ export function ContactSection() {
                       <textarea
                         {...register("message")}
                         rows={5}
-                        placeholder="Detail your application vision, timelines, or contract opportunity..."
+                        placeholder="Detail your application vision, timelines, or collaboration opportunity..."
                         className="w-full px-4 py-3.5 rounded-2xl bg-white/5 border border-white/10 text-white text-sm focus:outline-none focus:border-[#7C3AED] focus:ring-1 focus:ring-[#7C3AED] transition-all resize-none"
                       />
                       {errors.message && (
@@ -321,7 +301,7 @@ export function ContactSection() {
                     <button
                       type="submit"
                       disabled={isSubmitting}
-                      className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#7C3AED] via-[#3B82F6] to-[#EC4899] text-white font-bold text-sm shadow-2xl shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70"
+                      className="w-full py-4 rounded-2xl bg-gradient-to-r from-[#7C3AED] via-[#3B82F6] to-[#06B6D4] text-white font-bold text-sm shadow-2xl shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-[1.01] active:scale-[0.99] transition-all duration-300 flex items-center justify-center gap-2 disabled:opacity-70"
                     >
                       {isSubmitting ? (
                         <span>Sending Message...</span>
