@@ -17,7 +17,9 @@ export function BlixoSection() {
   ];
 
   return (
-    <section id="blixo" className="py-28 relative overflow-hidden bg-[#08090D]">
+    <section id="blixo" className="py-28 relative overflow-hidden bg-[#08090D]" aria-label="BliXo.Tech - Software Venture">
+      {/* Section top glow */}
+      <div className="section-glow-top" aria-hidden="true" />
       
       {/* Glow Effects */}
       <div className="absolute top-1/3 left-1/2 -translate-x-1/2 w-[700px] h-[700px] bg-[#7C3AED]/15 rounded-full blur-[180px] pointer-events-none -z-10" />
@@ -64,7 +66,7 @@ export function BlixoSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="rounded-[3rem] glass-panel border border-white/10 p-8 sm:p-12 shadow-2xl mb-20 relative overflow-hidden"
+          className="rounded-[3rem] glass-panel border border-white/10 p-8 sm:p-12 shadow-2xl mb-20 relative overflow-hidden card-shine hover:border-[#7C3AED]/30 hover:shadow-[0_20px_60px_rgba(124,58,237,0.12)] transition-all duration-500"
         >
           {/* Gradient accent bar */}
           <div className="h-1.5 w-full bg-gradient-to-r from-[#7C3AED] via-[#3B82F6] to-[#06B6D4] absolute top-0 left-0" />
@@ -94,9 +96,9 @@ export function BlixoSection() {
               {founderResponsibilities.map((resp, idx) => (
                 <div
                   key={idx}
-                  className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-[#7C3AED]/40 transition-colors flex items-start gap-3"
+                  className="p-4 rounded-2xl bg-white/5 border border-white/5 hover:border-[#7C3AED]/40 hover:bg-[#7C3AED]/08 hover:shadow-[0_0_12px_rgba(124,58,237,0.1)] transition-all duration-200 flex items-start gap-3 group"
                 >
-                  <CheckCircle2 className="w-4 h-4 text-[#06B6D4] shrink-0 mt-0.5" />
+                  <CheckCircle2 className="w-4 h-4 text-[#06B6D4] shrink-0 mt-0.5 group-hover:text-[#7C3AED] transition-colors" />
                   <span className="text-xs text-slate-200 font-medium leading-relaxed">
                     {resp}
                   </span>

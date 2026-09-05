@@ -94,7 +94,9 @@ export function ProjectsSection() {
   ];
 
   return (
-    <section id="projects" className="py-28 relative overflow-hidden bg-[#08090D]">
+    <section id="projects" className="py-28 relative overflow-hidden bg-[#08090D]" aria-label="Featured Projects Portfolio">
+      {/* Section top glow */}
+      <div className="section-glow-top" aria-hidden="true" />
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -132,7 +134,7 @@ export function ProjectsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
-          className="rounded-[3rem] glass-panel border border-white/10 overflow-hidden shadow-2xl p-8 sm:p-14 mb-24 relative"
+          className="rounded-[3rem] glass-panel border border-white/10 overflow-hidden shadow-2xl p-8 sm:p-14 mb-24 relative card-shine hover:border-[#7C3AED]/30 hover:shadow-[0_20px_80px_rgba(124,58,237,0.12)] transition-all duration-500"
         >
           {/* Header Bar */}
           <div className="flex flex-wrap items-center justify-between gap-4 mb-8 pb-6 border-b border-white/10">
@@ -238,7 +240,7 @@ export function ProjectsSection() {
               <motion.div
                 whileHover={{ rotateY: 6, rotateX: -4 }}
                 transition={{ type: "spring", stiffness: 200, damping: 20 }}
-                className="relative w-72 sm:w-80 h-[520px] sm:h-[580px] rounded-[3.5rem] border-8 border-[#161A22] bg-[#08090D] overflow-hidden shadow-[0_30px_70px_rgba(124,58,237,0.4)]"
+                className="relative w-72 sm:w-80 h-[520px] sm:h-[580px] rounded-[3.5rem] border-8 border-[#161A22] bg-[#08090D] overflow-hidden shadow-[0_30px_70px_rgba(124,58,237,0.5),0_0_0_1px_rgba(124,58,237,0.2)]"
               >
                 {/* Real App Screenshot */}
                 <Image
@@ -277,7 +279,7 @@ export function ProjectsSection() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
-              className="rounded-[3rem] glass-panel border border-white/10 p-8 sm:p-12 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-10 items-center"
+              className="rounded-[3rem] glass-panel border border-white/10 p-8 sm:p-12 shadow-2xl grid grid-cols-1 lg:grid-cols-12 gap-10 items-center card-shine hover:border-[#7C3AED]/30 hover:shadow-[0_12px_50px_rgba(124,58,237,0.1)] transition-all duration-500"
             >
               {/* Project Info */}
               <div className={`lg:col-span-6 space-y-6 ${idx % 2 === 1 ? "lg:order-2" : ""}`}>
@@ -304,7 +306,7 @@ export function ProjectsSection() {
                 {/* Tech Badges */}
                 <div className="flex flex-wrap gap-2">
                   {proj.tech.map((t) => (
-                    <span key={t} className="px-3 py-1 rounded-xl text-xs font-semibold bg-white/5 text-slate-300 border border-white/10">
+                    <span key={t} className="px-3 py-1 rounded-xl text-xs font-semibold bg-white/5 text-slate-300 border border-white/10 tag-hover">
                       {t}
                     </span>
                   ))}

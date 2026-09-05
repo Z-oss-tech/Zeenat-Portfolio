@@ -60,10 +60,13 @@ export function ContactSection() {
   };
 
   return (
-    <section id="contact" className="py-28 relative overflow-hidden bg-[#08090D]">
+    <section id="contact" className="py-28 relative overflow-hidden bg-[#08090D]" aria-label="Contact Zeenat Shaikh">
+      {/* Section top glow */}
+      <div className="section-glow-top" aria-hidden="true" />
       
-      {/* Background Glow */}
-      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#7C3AED]/15 rounded-full blur-[160px] pointer-events-none -z-10" />
+      {/* Background Glows */}
+      <div className="absolute top-1/4 right-0 w-[500px] h-[500px] bg-[#7C3AED]/15 rounded-full blur-[160px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-[#3B82F6]/08 rounded-full blur-[160px] pointer-events-none -z-10" aria-hidden="true" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
@@ -100,7 +103,7 @@ export function ContactSection() {
             transition={{ duration: 0.7 }}
             className="lg:col-span-5 space-y-6 flex flex-col justify-between"
           >
-            <div className="p-8 rounded-3xl glass-panel border border-white/10 shadow-2xl space-y-6">
+            <div className="p-8 rounded-3xl glass-panel border border-white/10 shadow-2xl space-y-6 card-shine hover:border-[#7C3AED]/30 hover:shadow-[0_8px_40px_rgba(124,58,237,0.1)] transition-all duration-300">
               
               {/* Profile Card Header */}
               <div className="flex items-center gap-4 pb-6 border-b border-white/10">

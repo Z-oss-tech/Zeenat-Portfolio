@@ -253,7 +253,14 @@ export function SkillsSection() {
       : skillsList.filter((s) => s.category === activeTab);
 
   return (
-    <section id="skills" className="py-28 relative overflow-hidden bg-[#08090D]">
+    <section id="skills" className="py-28 relative overflow-hidden bg-[#08090D]" aria-label="Tech Stack & Skills">
+      {/* Section top glow */}
+      <div className="section-glow-top" aria-hidden="true" />
+
+      {/* Ambient orbs */}
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-[#7C3AED]/08 rounded-full blur-[160px] pointer-events-none -z-10" aria-hidden="true" />
+      <div className="absolute top-1/3 right-0 w-[400px] h-[400px] bg-[#06B6D4]/06 rounded-full blur-[160px] pointer-events-none -z-10" aria-hidden="true" />
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Header */}
@@ -274,6 +281,10 @@ export function SkillsSection() {
             <p className="text-base sm:text-lg text-slate-400">
               Click or hover any technology card to inspect description and associated projects.
             </p>
+            <div className="mt-4 inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-white/5 border border-white/10 text-xs text-slate-400 font-mono">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse" aria-hidden="true" />
+              {filteredSkills.length} technologies loaded
+            </div>
           </motion.div>
         </div>
 
@@ -307,13 +318,18 @@ export function SkillsSection() {
                   whileHover={{ scale: 1.04, y: -2 }}
                   whileTap={{ scale: 0.96 }}
                   onClick={() => setSelectedSkill(sk)}
-                  className={`p-4 rounded-2xl glass-panel border cursor-pointer transition-all duration-300 flex items-center gap-3 ${
+                  role="button"
+                  aria-pressed={isSelected}
+                  aria-label={`${sk.name} – ${sk.category}`}
+                  tabIndex={0}
+                  onKeyDown={(e) => e.key === 'Enter' && setSelectedSkill(sk)}
+                  className={`p-4 rounded-2xl glass-panel border cursor-pointer transition-all duration-300 flex items-center gap-3 card-shine ${
                     isSelected
                       ? "border-[#7C3AED] bg-[#7C3AED]/20 shadow-lg shadow-purple-500/20"
-                      : "border-white/10 hover:border-white/20"
+                      : "border-white/10 hover:border-white/20 hover:shadow-[0_4px_20px_rgba(124,58,237,0.1)]"
                   }`}
                 >
-                  <div className="w-10 h-10 rounded-xl bg-white/5 flex items-center justify-center text-xl shrink-0">
+                  <div className={`w-10 h-10 rounded-xl flex items-center justify-center text-xl shrink-0 transition-all duration-300 ${isSelected ? 'bg-[#7C3AED]/30' : 'bg-white/5'}`}>
                     {sk.icon}
                   </div>
                   <div className="truncate">
@@ -369,7 +385,7 @@ export function SkillsSection() {
                       {selectedSkill.projects.map((p) => (
                         <span
                           key={p}
-                          className="px-3 py-1 rounded-xl text-xs font-semibold bg-white/5 text-[#3B82F6] border border-white/10"
+                          className="px-3 py-1 rounded-xl text-xs font-semibold bg-white/5 text-[#3B82F6] border border-white/10 tag-hover"
                         >
                           {p}
                         </span>

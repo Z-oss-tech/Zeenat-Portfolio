@@ -3,8 +3,15 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
-import { ArrowDown, ArrowRight, Download, Mail, Sparkles, Smartphone, Layers, ShieldCheck, Flame } from "lucide-react";
+import { ArrowRight, Download, Mail, Sparkles } from "lucide-react";
 import { GithubIcon, LinkedinIcon } from "@/components/ui/Icons";
+
+const stats = [
+  { value: "4+", label: "Apps Shipped" },
+  { value: "2+", label: "Years Experience" },
+  { value: "5+", label: "Technologies" },
+  { value: "1", label: "Venture Founded" },
+];
 
 export function HeroSection() {
   const [typedRole, setTypedRole] = useState("");
@@ -31,15 +38,21 @@ export function HeroSection() {
   ];
 
   return (
-    <section className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden bg-[#08090D]">
-      
+    <section
+      id="hero"
+      className="relative min-h-screen pt-32 pb-20 flex items-center justify-center overflow-hidden bg-[#08090D]"
+      aria-label="Hero – Zeenat Shaikh Introduction"
+    >
       {/* Ambient Aurora Mesh Lights */}
       <div className="absolute top-1/4 left-1/4 w-[600px] h-[600px] bg-[#7C3AED]/20 rounded-full blur-[160px] animate-aurora pointer-events-none -z-10" />
       <div className="absolute bottom-10 right-1/4 w-[500px] h-[500px] bg-[#3B82F6]/15 rounded-full blur-[160px] animate-aurora [animation-delay:6s] pointer-events-none -z-10" />
       <div className="absolute top-10 right-10 w-[400px] h-[400px] bg-[#06B6D4]/15 rounded-full blur-[160px] animate-aurora [animation-delay:12s] pointer-events-none -z-10" />
 
-      {/* Grid Pattern Mask */}
-      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff05_1px,transparent_1px),linear-gradient(to_bottom,#ffffff05_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
+      {/* Dot Grid Pattern */}
+      <div className="absolute inset-0 dot-grid [mask-image:radial-gradient(ellipse_70%_60%_at_50%_50%,#000_60%,transparent_100%)] pointer-events-none -z-10 opacity-60" />
+
+      {/* Grid Line Overlay */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_right,#ffffff04_1px,transparent_1px),linear-gradient(to_bottom,#ffffff04_1px,transparent_1px)] bg-[size:4rem_4rem] [mask-image:radial-gradient(ellipse_60%_50%_at_50%_50%,#000_70%,transparent_100%)] pointer-events-none -z-10" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
@@ -56,11 +69,13 @@ export function HeroSection() {
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
               transition={{ delay: 0.3 }}
-              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill text-xs font-semibold text-[#06B6D4] mb-6 border border-white/10"
+              className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full glass-pill text-xs font-semibold text-[#06B6D4] mb-6 border border-white/10 animate-pulse-glow"
             >
-              <span className="w-2 h-2 rounded-full bg-[#22C55E] animate-ping" />
-              <span className="w-2 h-2 rounded-full bg-[#22C55E] absolute" />
-              <span className="ml-2 font-medium tracking-wide">Available for Mobile &amp; Web Development</span>
+              <span className="relative flex h-2 w-2">
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#22C55E] opacity-75" />
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-[#22C55E]" />
+              </span>
+              <span className="font-medium tracking-wide">Available for Mobile &amp; Web Development</span>
             </motion.div>
 
             {/* Editorial Headline */}
@@ -87,6 +102,7 @@ export function HeroSection() {
             <div className="flex flex-wrap items-center gap-4 mb-8 w-full sm:w-auto">
               <a
                 href="#projects"
+                aria-label="View Zeenat Shaikh's Projects"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-2xl bg-gradient-to-r from-[#7C3AED] via-[#3B82F6] to-[#06B6D4] text-white font-bold text-sm shadow-2xl shadow-purple-500/25 hover:shadow-purple-500/40 hover:scale-105 active:scale-95 transition-all duration-300"
               >
                 View Projects
@@ -96,6 +112,7 @@ export function HeroSection() {
               <a
                 href="/assets/zeenat_profile.jpg"
                 download="Zeenat_Shaikh_Resume.jpg"
+                aria-label="Download Zeenat Shaikh's Resume"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-7 py-4 rounded-2xl glass-panel text-white font-semibold text-sm border border-white/10 hover:border-[#7C3AED]/50 hover:bg-white/5 transition-all duration-300"
               >
                 Download Resume
@@ -104,6 +121,7 @@ export function HeroSection() {
 
               <a
                 href="#contact"
+                aria-label="Contact Zeenat Shaikh"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2 py-4 px-6 rounded-2xl glass-pill text-slate-300 hover:text-white font-semibold text-sm transition-all"
               >
                 <Mail className="w-4 h-4 text-[#06B6D4]" />
@@ -112,26 +130,48 @@ export function HeroSection() {
             </div>
 
             {/* Social Channels */}
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 mb-10">
               <a
                 href="https://github.com/Z-oss-tech"
                 target="_blank"
-                rel="noreferrer"
-                className="p-3 rounded-2xl glass-pill text-slate-300 hover:text-white hover:border-[#7C3AED] transition-all hover:scale-110"
-                aria-label="GitHub"
+                rel="noreferrer noopener"
+                className="p-3 rounded-2xl glass-pill text-slate-300 hover:text-white hover:border-[#7C3AED] hover:shadow-[0_0_12px_rgba(124,58,237,0.3)] transition-all hover:scale-110"
+                aria-label="Zeenat Shaikh GitHub Profile"
               >
                 <GithubIcon className="w-4 h-4" />
               </a>
               <a
                 href="https://www.linkedin.com/in/zeenat-shaikh-6bb09930a/?locale=en"
                 target="_blank"
-                rel="noreferrer"
-                className="p-3 rounded-2xl glass-pill text-slate-300 hover:text-white hover:border-[#3B82F6] transition-all hover:scale-110"
-                aria-label="LinkedIn"
+                rel="noreferrer noopener"
+                className="p-3 rounded-2xl glass-pill text-slate-300 hover:text-white hover:border-[#3B82F6] hover:shadow-[0_0_12px_rgba(59,130,246,0.3)] transition-all hover:scale-110"
+                aria-label="Zeenat Shaikh LinkedIn Profile"
               >
                 <LinkedinIcon className="w-4 h-4" />
               </a>
             </div>
+
+            {/* Stats Row */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ delay: 0.8, duration: 0.6 }}
+              className="grid grid-cols-4 gap-3 w-full max-w-lg"
+            >
+              {stats.map((stat) => (
+                <div
+                  key={stat.label}
+                  className="stat-card p-3 rounded-2xl glass-panel border border-white/10 text-center hover:border-[#7C3AED]/40 transition-all duration-300 card-shine"
+                >
+                  <div className="text-xl sm:text-2xl font-extrabold font-heading text-gradient-purple">
+                    {stat.value}
+                  </div>
+                  <div className="text-[9px] sm:text-[10px] text-slate-400 font-medium leading-tight mt-0.5">
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </motion.div>
           </motion.div>
 
           {/* Right Column: Blended Portrait & Floating Tech Icons */}
@@ -153,33 +193,56 @@ export function HeroSection() {
                 }`}
                 style={{ animationDelay: `${item.delay}s` }}
                 title={item.name}
+                aria-hidden="true"
               >
                 {item.icon}
               </div>
             ))}
 
-            {/* Cutout Portrait (Blended into background naturally) */}
-            <div className="relative w-64 sm:w-80 h-[400px] sm:h-[460px] z-10 filter drop-shadow-[0_20px_35px_rgba(124,58,237,0.3)]">
-              <div className="w-full h-full rounded-[3.5rem] overflow-hidden border-2 border-white/20 relative bg-[#101218]/60 backdrop-blur-md">
+            {/* Cutout Portrait */}
+            <div className="relative w-64 sm:w-80 h-[400px] sm:h-[460px] z-10 filter drop-shadow-[0_20px_35px_rgba(124,58,237,0.35)] animate-float-slow">
+              <div className="w-full h-full rounded-[3.5rem] overflow-hidden border-2 border-white/20 relative bg-[#101218]/60 backdrop-blur-md hover:border-[#7C3AED]/50 transition-colors duration-500">
                 <Image
                   src="/assets/zeenat_profile.jpg"
-                  alt="Zeenat Shaikh"
+                  alt="Zeenat Shaikh – Android & Flutter Developer"
                   fill
                   priority
+                  sizes="(max-width: 640px) 256px, 320px"
                   className="object-cover object-top hover:scale-105 transition-transform duration-700 ease-out"
                 />
               </div>
 
               {/* Floating SmartKhata Badge */}
-              <div className="absolute -bottom-4 -left-4 sm:-left-6 p-4 rounded-2xl glass-panel border border-white/20 shadow-2xl flex items-center gap-3 backdrop-blur-xl">
-                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#7C3AED] to-[#3B82F6] flex items-center justify-center text-white text-lg font-bold">
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.2, duration: 0.5 }}
+                className="absolute -bottom-4 -left-4 sm:-left-6 p-4 rounded-2xl glass-panel border border-white/20 shadow-2xl flex items-center gap-3 backdrop-blur-xl hover:border-[#7C3AED]/40 transition-colors"
+              >
+                <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-[#7C3AED] to-[#3B82F6] flex items-center justify-center text-white text-lg font-bold animate-pulse-glow">
                   🚀
                 </div>
                 <div>
                   <h4 className="font-heading font-bold text-xs text-white">SmartKhata</h4>
                   <p className="text-[10px] text-[#06B6D4] font-medium">Flagship Flutter Cashbook</p>
                 </div>
-              </div>
+              </motion.div>
+
+              {/* BliXo Badge */}
+              <motion.div
+                initial={{ opacity: 0, x: 20 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ delay: 1.4, duration: 0.5 }}
+                className="absolute -top-4 -right-4 sm:-right-6 p-3 rounded-2xl glass-panel border border-white/20 shadow-2xl flex items-center gap-2 backdrop-blur-xl"
+              >
+                <div className="w-8 h-8 rounded-lg bg-gradient-to-tr from-[#EC4899] to-[#7C3AED] flex items-center justify-center text-white text-sm font-bold">
+                  <Sparkles className="w-4 h-4" />
+                </div>
+                <div>
+                  <p className="text-[9px] font-bold text-white">BliXo.Tech</p>
+                  <p className="text-[8px] text-[#EC4899] font-medium">Founder</p>
+                </div>
+              </motion.div>
             </div>
 
           </motion.div>

@@ -24,7 +24,9 @@ export function ExperienceSection() {
   ];
 
   return (
-    <section id="experience" className="py-28 relative overflow-hidden bg-[#08090D]">
+    <section id="experience" className="py-28 relative overflow-hidden bg-[#08090D]" aria-label="Work Experience & Education">
+      {/* Section top glow */}
+      <div className="section-glow-top" aria-hidden="true" />
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
@@ -64,7 +66,7 @@ export function ExperienceSection() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6 }}
-                className="p-8 rounded-3xl glass-panel border border-white/10 shadow-2xl space-y-6 hover:border-[#7C3AED]/50 transition-all duration-300"
+                className="p-8 rounded-3xl glass-panel border border-white/10 shadow-2xl space-y-6 hover:border-[#7C3AED]/50 hover:shadow-[0_8px_40px_rgba(124,58,237,0.1)] transition-all duration-300 card-shine"
               >
                 <div className="flex flex-wrap items-center justify-between gap-2 pb-4 border-b border-white/10">
                   <div>
@@ -86,12 +88,12 @@ export function ExperienceSection() {
                   <span className="text-xs font-bold uppercase tracking-wider text-slate-400 block mb-2">
                     Key Contributions:
                   </span>
-                  {exp.responsibilities.map((resp, i) => (
-                    <div key={i} className="flex items-start gap-2 text-xs text-slate-300">
-                      <CheckCircle2 className="w-4 h-4 text-[#06B6D4] shrink-0 mt-0.5" />
-                      <span>{resp}</span>
-                    </div>
-                  ))}
+                    {exp.responsibilities.map((resp, i) => (
+                      <div key={i} className="flex items-start gap-2 text-xs text-slate-300 group">
+                        <CheckCircle2 className="w-4 h-4 text-[#06B6D4] shrink-0 mt-0.5 group-hover:text-[#7C3AED] transition-colors" />
+                        <span className="group-hover:text-white transition-colors">{resp}</span>
+                      </div>
+                    ))}
                 </div>
 
                 <div className="pt-2">
